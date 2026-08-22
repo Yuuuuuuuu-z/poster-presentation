@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* カラーパレットの定義（全体を薄い紫系で統一） */
+        :root {
+            --primary-color: #a285c9;    /* メインの薄い紫色 */
+            --primary-hover: #6D5C6F;    /* ボタンホバー時の少し濃い紫色 */
+            --bg-color: #fbf9fc;         /* 画面全体の背景色（ごく薄い紫がかった白） */
+            --card-bg: #ffffff;          /* コンテンツ部分の背景色（白） */
+            --text-main: #374151;        /* メインの文字色（濃いグレー） */
+            --text-muted: #6b7280;       /* サブの文字色 */
+            --accent-color: #f4eff8;     /* 著者情報などの背景アクセント（薄い紫） */
+        }
+
+        body { 
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; 
+            line-height: 1.8; 
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0; 
+            padding: 40px 20px; 
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 50px 60px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(121, 95, 148, 0.06); /* 影も少しだけ紫がからせて馴染ませる */
+        }
+
+        h1 { 
+            font-size: 1.8em; 
+            text-align: center; 
+            color: #1f1b24;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        /* タイトルの下線グラデーションを紫系に修正 */
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #d0bdf4);
+            border-radius: 2px;
+        }
+
+        /* 枠線も紫系に修正 */
+        .author { 
+            text-align: center; 
+            margin-bottom: 40px; 
+            font-size: 1.05em; 
+            background-color: var(--accent-color); 
+            padding: 25px; 
+            border-radius: 12px; 
+            border: 1px solid #e2d5f0; 
+        }
+
+        .author .name {
+            font-size: 1.25em;
+            font-weight: bold;
+            margin: 8px 0;
+            color: #1f1b24;
+        }
+
+        .author a { 
+            color: var(--primary-color); 
+            text-decoration: none; 
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .author a:hover { 
+            color: var(--primary-hover); 
+            text-decoration: underline; 
+        }
+
+        .download-section { 
+            text-align: center; 
+            margin: 50px 0; 
+            padding: 40px 20px; 
+            background: linear-gradient(to bottom right, #fcfbfc, #f6f3f9);
+            border-radius: 12px; 
+            border: 1px dashed #d5c8e3;
+        }
+
+        .download-section p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* ボタンの影(box-shadow)も紫系のRGBに変更 */
+        .download-btn { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px; 
+            background-color: var(--primary-color); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(162, 133, 201, 0.3); 
+        }
+
+        .download-btn:hover { 
+            background-color: var(--primary-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(134, 102, 179, 0.4); 
+        }
+
+        h2 { 
+            font-size: 1.4em; 
+            margin-top: 50px; 
+            border-left: 5px solid var(--primary-color); 
+            padding-left: 15px; 
+            color: #374151;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 0.95em; }
+        th, td { border: 1px solid #e5e7eb; padding: 12px 15px; text-align: left; }
+        th { background-color: #f9fafb; font-weight: bold; color: #374151; border-bottom: 2px solid #d1d5db; }
+        
+        .tree, .references { background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; }
+        .tree { padding: 20px; overflow-x: auto; font-family: ui-monospace, monospace; font-size: 0.9em; white-space: pre; color: #4b5563; }
+        .references { font-size: 0.9em; margin-top: 50px; padding: 25px; color: var(--text-muted); }
+        .references p { margin: 8px 0; }
+        
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .container { padding: 30px 20px; }
+            h1 { font-size: 1.4em; }
+            .download-btn { width: 85%; padding: 15px 0; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Home page</h1>
+        
+        <div class="author">
+            会津大学 コンピュータ理工学部 3年
+            <div class="name">杉山友月</div>
+            Email: <a href="mailto:s1320166@u-aizu.ac.jp">s1320166@u-aizu.ac.jp</a>
+        </div>
+
+        <div class="download-section">
+            <p>「VV型複合動詞とVV型複合動名詞の形成に関する考察」のポスター資料（PDF）はこちらからダウンロードできます。</p>
+            <a href="poster.pdf" class="download-btn" download>ポスターをダウンロード</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
